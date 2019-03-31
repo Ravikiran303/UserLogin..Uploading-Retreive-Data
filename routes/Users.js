@@ -66,7 +66,7 @@ users.post('/login',(req,res) => {
         res.send('error'+ err);
     })
 });
-users.get('/profie',(req,res) => {
+users.get('/profile',(req,res) => {
     var decoded = jwt.verify(req.headers['authorization'],process.env.SECRET_KEY);
 
     User.findOne({

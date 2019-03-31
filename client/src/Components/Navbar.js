@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link,withRouter } from 'react-router-dom';
+import {Profile} from './Profile';
 
 export class Navbar extends Component {
     logOut(e){
@@ -11,8 +12,8 @@ export class Navbar extends Component {
       const userLink = (
         <ul className="navbar-nav">
             <li className="nav-item">
-                <Link to="/profile" nv-link>
-                    User
+                <Link to="/profile" className="nav-link">
+                    {this.props.first_name}
                 </Link>
             </li>
             <li className="nav-item">
@@ -24,12 +25,12 @@ export class Navbar extends Component {
       const loginRegLink = (
         <ul className="navbar-nav">
             <li className="nav-item">
-                <Link to="/login" nv-link>
+                <Link to="/login" className="nav-link">
                     login
                 </Link>
             </li>
             <li className="nav-item">
-            <Link to="/Register" nv-link>
+            <Link to="/Register" className="nav-link">
                     Register
                 </Link>
             </li>
