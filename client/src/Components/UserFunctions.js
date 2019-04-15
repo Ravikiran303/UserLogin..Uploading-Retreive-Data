@@ -2,14 +2,11 @@ import axios from 'axios';
 
 export const register = newUser => {
     return axios.post('users/Register',{
-        first_name:newUser.first_name,
-        last_name:newUser.last_name,
         email:newUser.email,
-        password:newUser.password,
-        address:newUser.address,
-        mobile:newUser.mobile
+        password:newUser.password
     }).then(res => {
-        console.log('Registered!');
+        console.log('Registered..!');
+        return res.status;
     })
 }
 export const login = user => {
@@ -29,10 +26,21 @@ export const getProfile = token => {
         headers: { Authorization: ` ${token}` }
       })
       .then(response => {
-        console.log(response)
-        return response.data
+       console.log(response);
+       return response.data;
       })
       .catch(err => {
         console.log(err)
       })
   }
+  export const threads = newThread => {
+    return axios.post('users/thread',{
+        email:newThread.email,
+        title:newThread.title,
+        description:newThread.description,
+        tags:newThread.tags  
+    }).then(res => {
+        console.log('Thread Created..!',res);
+        return res.status;
+    })
+}

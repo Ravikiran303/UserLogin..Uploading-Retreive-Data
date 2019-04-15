@@ -5,10 +5,9 @@ class Register extends Component {
     constructor() {
         super()
         this.state = {
-            first_name: '',
-            last_name: '',
+ 
             email: '',
-            password: '',
+            password: ''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -22,18 +21,16 @@ class Register extends Component {
         e.preventDefault()
 
         const user = {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
             email: this.state.email,
-            password: this.state.password,
-            address:this.state.address,
-            mobile:this.state.mobile
+            password: this.state.password
         }
-
-            register(user).then(res => {
+        register(user).then(res => {
                 if(res){
+                    console.log('gujhgjujhui',res);
                     this.props.history.push('/login');
-                    
+                }
+                else{
+                    console.log('fyghuijhnkio',res);
                 }
             });
         
@@ -46,24 +43,7 @@ class Register extends Component {
                     <div className="col-md-6 mt-5 mx-auto">
                         <form noValidate onSubmit={this.onSubmit}>
                             <h1 className="h3 mb-3 font-weight-normal">Please signUp</h1>
-                            <div className="form-group">
-                                <label htmlFor="first_name">First Name</label>
-                                <input type="text"
-                                    className="form-control"
-                                    name="first_name"
-                                    placeholder="Enter First Name"
-                                    value={this.state.first_name}
-                                    onChange={this.onChange} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="last_name">Last Name</label>
-                                <input type="text"
-                                    className="form-control"
-                                    name="last_name"
-                                    placeholder="Enter Last Name"
-                                    value={this.state.last_name}
-                                    onChange={this.onChange} />
-                            </div>
+                            
                             <div className="form-group">
                                 <label htmlFor="email">Email Address</label>
                                 <input type="email"
@@ -80,24 +60,6 @@ class Register extends Component {
                                     name="password"
                                     placeholder="Enter Password"
                                     value={this.state.password}
-                                    onChange={this.onChange} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="address">Address</label>
-                                <input type="text"
-                                    className="form-control"
-                                    name="address"
-                                    placeholder="Enter address"
-                                    value={this.state.address}
-                                    onChange={this.onChange} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="mobile">Mobile</label>
-                                <input type="number"
-                                    className="form-control"
-                                    name="mobile"
-                                    placeholder="Enter Mobile"
-                                    value={this.state.mobile}
                                     onChange={this.onChange} />
                             </div>
                             <button type="submit" className="btn btn-lg btn-primary btn-block">

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link,withRouter } from 'react-router-dom';
-import {Profile} from './Profile';
 
 export class Navbar extends Component {
     logOut(e){
@@ -12,29 +11,23 @@ export class Navbar extends Component {
       const userLink = (
         <ul className="navbar-nav">
             <li className="nav-item">
-                <Link to="/profile" className="nav-link">
-                    {this.props.first_name}
-                </Link>
-            </li>
-            <li className="nav-item">
                 <a href="/" onClick={this.logOut.bind(this)} className="nav-link">Logout</a>
             </li>
            
         </ul>
       );
       const loginRegLink = (
-        <ul className="navbar-nav">
+        <ul className="navbar-nav" >
             <li className="nav-item">
                 <Link to="/login" className="nav-link">
                     login
                 </Link>
-            </li>
-            <li className="nav-item">
-            <Link to="/Register" className="nav-link">
+                </li>
+                <li className="nav-item">
+                <Link to="/Register" className="nav-link">
                     Register
                 </Link>
-            </li>
-           
+            </li>        
         </ul>
       );
       return(
@@ -48,13 +41,9 @@ export class Navbar extends Component {
             aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse justify-content-md-center" id="navbar1">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <Link to="/" className="nav-link">
-                            Home
-                        </Link>
-                    </li>
+            <div className="collapse navbar-collapse" id="navbar1">
+                <ul className="navbar-nav mr-auto text-white" >
+                    D-Coder
                 </ul>
                 {localStorage.usertoken ? userLink : loginRegLink}
             </div>

@@ -5,18 +5,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const User = require('../models/User');
+const Thread = require('../models/Thread');
 users.use(cors());
 
 process.env.SECRET_KEY = 'secret';
 
 users.post('/Register',(req,res) =>{
     const userData = {
-        first_name:req.body.first_name,
-        last_name:req.body.last_name,
         email:req.body.email,
-        password:req.body.password,
-        address:req.body.address,
-        mobile:req.body.mobile
+        password:req.body.password
     };
     User.findOne({
         email:req.body.email
@@ -46,11 +43,7 @@ users.post('/login',(req,res) => {
             if(bcrypt.compareSync(req.body.password,user.password)){
                 const payload = {
                     _id:user._id,
-                    first_name:user.first_name,
-                    last_name:user.last_name,
                     email:user.email,
-                    address:user.address,
-                    mobile:user.mobile
                 }
                 let token = jwt.sign(payload,process.env.SECRET_KEY,{
                     expiresIn:3220
@@ -73,13 +66,40 @@ users.get('/profile',(req,res) => {
         _id:decoded._id
     }).then(user =>{
         if(user){
-            res.json(user);
+            Thread.find({}).exec().then(threads =>{
+                if(threads.length>0){
+                    var newuser = user.toObject();
+                    newuser.threads = threads;
+                    res.json(newuser);
+                }else{
+                    console.log("No tags exist");
+                    res.json(user);
+                }
+            }).catch(err => {
+                res.send(err + "error");
+            })
         }else{
             res.send("User does not exist");
         }
     }).catch(err => {
         res.send(err + "error");
     })
+});
+users.post('/thread',(req,res) =>{
+    const today = new Date();
+    const threadData = {
+        email:req.body.email,
+        title:req.body.title,
+        description:req.body.description,
+        tags:req.body.tags,
+        date:today
+    };
+    Thread.create(threadData).then(user => {
+        res.json({status: threadData.title + 'added'});
+    }).catch(err => {
+        res.send('err' + err);
+    })
+
 });
 
 module.exports = users;

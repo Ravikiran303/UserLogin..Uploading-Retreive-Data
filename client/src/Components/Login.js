@@ -21,7 +21,7 @@ export class Login extends Component {
             password:this.state.password
         }
         login(user).then(res => {
-            if(res){
+            if(!res.error){
                 this.props.history.push('/profile');
             }
         });
@@ -57,7 +57,7 @@ export class Login extends Component {
                     </div> */}
                     <button type="submit" className="btn btn-lg btn-primary btn-block">
                         Sign in
-                    </button>
+                    </button> 
                 </form>
             </div>
         </div>

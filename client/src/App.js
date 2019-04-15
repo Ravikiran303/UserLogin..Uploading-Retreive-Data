@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 
 import Navbar from './Components/Navbar';
-import Landing from './Components/Landing';
+//  import Landing from './Components/Landing';
 import Login from './Components/Login';
 import Profie from './Components/Profile'
 import Register from './Components/Register';
+import addingTo from './Components/addingTo';
 
 
 class App extends Component {
@@ -14,8 +15,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navbar/>
-          <Route exact path='/' component={Landing}/>
+          
           <div className="container">
+          <Route exact path='/addingTo' component={addingTo}/>
           <Route exact path='/Register' component={Register}/>
           <Route exact path='/login' component={Login}/>
           <Route exact path='/profile' component={Profie}/>
